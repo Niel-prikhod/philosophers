@@ -6,22 +6,22 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:20:16 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/04/28 20:04:18 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/04/30 17:53:22 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <limits.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 
 /*
-* # DESCRIPTION
-*
-* Turn string to unsigned integer, accept only true strings, on invalid 
-* charecters returns '0'
-*/
-int	ft_atou(char *str)
+ * # DESCRIPTION
+ *
+ * Turn string to unsigned integer, accept only true strings, on invalid
+ * charecters returns '0'
+ */
+static int	ft_atou(char *str)
 {
 	long	res;
 
@@ -40,18 +40,33 @@ int	ft_atou(char *str)
 	return (res);
 }
 
-t_philo	*init_args(int argc, char **argv)
+static int	check_args(t_args *args)
 {
-	t_philo	*parsed_args;
+	if (args->number == 0)
+		return (1);
+	if (args->time_to_die == 0)
+		return (1);
+	if (args->time_to_eat == 0)
+		return (1);
+	if (args->time_to_sleep == 0)
+		return (1);
+	return (0);
+}
 
-	parsed_args = malloc(sizeof(t_philo));
+t_args	*init_args(int argc, char **argv)
+{
+	t_args	*parsed_args;
+
+	parsed_args = malloc(sizeof(t_args));
 	if (!parsed_args)
 		return (NULL);
-	memset(parsed_args, '0', sizeof(t_philo));
+	memset(parsed_args, 0, sizeof(t_args));
 	parsed_args->number = ft_atou(argv[1]);
 	parsed_args->time_to_die = ft_atou(argv[2]);
 	parsed_args->time_to_eat = ft_atou(argv[3]);
 	parsed_args->time_to_sleep = ft_atou(argv[4]);
+	if (check_args(parsed_args))
+		return (free(parsed_args), NULL);	
 	if (argc == 6)
 		parsed_args->eat_count = ft_atou(argv[5]);
 	return (parsed_args);

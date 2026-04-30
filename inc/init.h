@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/28 18:07:10 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/04/30 11:24:33 by dprikhod         ###   ########.fr       */
+/*   Created: 2026/04/29 12:55:12 by dprikhod          #+#    #+#             */
+/*   Updated: 2026/04/30 11:24:29 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include "init.h"
+#ifndef INIT_H
+# define INIT_H
 
-/*
-number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
-*/
-int main(int argc, char **argv)
-{
-	t_args	*ph;
+# include "philo.h"
+t_args	*init_args(int argc, char **argv);
 
-	if (argc > 6 || argc < 5)
-		return (1);
-	(void) argv;
-	ph = init_args(argc, argv);
-	if (!ph) 
-		return (1);
-	return (0);
-}
+#endif
