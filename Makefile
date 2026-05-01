@@ -10,7 +10,7 @@ SRCS 		= $(addprefix $(SRC_DIR)/, \
 		  		init.c \
 		  		)
 
-COMP_FLAGS 	= -Wall -Wextra -Werror -I$(INC_DIR)
+COMP_FLAGS 	= -Wall -Wextra -Werror -I$(INC_DIR) -pthread
 LINK_FLAGS 	= -L$(INC_DIR)
 DFLAGS 		= -g -O0 
 ADDRESS	= address,undefined
