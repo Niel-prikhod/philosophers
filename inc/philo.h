@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:04:46 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/02 17:43:56 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:55:29 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ typedef struct s_philo
 {
 	t_args			args;
 	t_thinker		*people;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	logger;
 	t_mmu			*mmu;
 	t_phl_time		start_time;
+	pthread_mutex_t	simulation;
+	int				death_flag;
 }					t_philo;
 
 #endif
