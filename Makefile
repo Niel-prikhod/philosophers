@@ -8,6 +8,9 @@ INC_DIR		= inc
 SRCS 		= $(addprefix $(SRC_DIR)/, \
 		  		philo.c \
 		  		init.c \
+				phl_utils.c \
+				mmu.c \
+				phl_thread_routine.c \
 		  		)
 
 COMP_FLAGS 	= -Wall -Wextra -Werror -I$(INC_DIR) -pthread

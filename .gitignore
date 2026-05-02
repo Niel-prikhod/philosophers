@@ -3,3 +3,4 @@ philo
 build/
 .cache/
 *.log*
+.gdb
