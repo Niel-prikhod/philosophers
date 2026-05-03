@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:04:46 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/02 17:55:29 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/03 20:32:05 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # define FAILURE 1
 
 # include "mmu.h"
-# include <pthread.h>
 # include "phl_utils.h"
+# include <pthread.h>
+# include <stdbool.h>
 
 typedef struct s_args
 {
@@ -29,23 +30,39 @@ typedef struct s_args
 	unsigned int	eat_count;
 }					t_args;
 
+typedef struct s_mutex
+{
+	pthread_mutex_t	mutex;
+	bool			flag;
+}					t_phl_mutex;
+
+typedef struct s_time_mutex
+{
+	pthread_mutex_t	mutex;
+	t_phl_time		time;
+}					t_time_mutex;
+
 typedef struct s_thinker
 {
-	unsigned int	phil_id;
+	size_t			phil_id;
 	pthread_t		tid;
-	t_phl_time		time_last_eat;
+	t_time_mutex	time_last_eat;
+	t_args			*args;
+	t_phl_mutex		left_fork;
+	t_phl_mutex		right_fork;
+	t_phl_mutex		logger;
+	t_phl_mutex		sim;
 }					t_thinker;
 
 typedef struct s_philo
 {
-	t_args			args;
-	t_thinker		*people;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	logger;
 	t_mmu			*mmu;
+	t_thinker		*people;
+	t_phl_mutex		*forks;
+	t_args			args;
+	t_phl_mutex		logger;
 	t_phl_time		start_time;
-	pthread_mutex_t	simulation;
-	int				death_flag;
+	t_phl_mutex		simulation;
 }					t_philo;
 
 #endif

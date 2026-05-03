@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phl_utils.h                                        :+:      :+:    :+:   */
+/*   phl_thread_routine.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 14:30:29 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/03 20:28:27 by dprikhod         ###   ########.fr       */
+/*   Created: 2026/05/03 17:02:10 by dprikhod          #+#    #+#             */
+/*   Updated: 2026/05/03 17:04:01 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHL_UTILS_H
-# define PHL_UTILS_H
+#ifndef PHL_THREAD_ROUTINE_H
+# define PHL_THREAD_ROUTINE_H
 
-typedef unsigned long t_phl_time;
-
-t_phl_time phl_get_timestamp(t_phl_time begin);
+void	*thinker_routine(void *arg);
+void	*checker_routine(void *arg);
 
 #endif

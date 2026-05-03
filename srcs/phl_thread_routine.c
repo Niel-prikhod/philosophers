@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 11:17:52 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/02 18:12:20 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/03 17:03:29 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "philo.h"
 #include "phl_utils.h"
 
-void	take_forks(pthread_mutex_t left, pthread_mutex_t right, 
+static void	take_forks(pthread_mutex_t left, pthread_mutex_t right, 
 				pthread_mutex_t logger, size_t phil_id);
 
-void	phl_log_str(pthread_mutex_t logger, size_t phil_id, const char *str);
+static void	phl_log_str(pthread_mutex_t logger, size_t phil_id, const char *str);
 
-size_t	phl_init_thinker();
+static size_t	phl_init_thinker();
 
 /*
 * arg should be `t_thinker`, but I need `t_arg`, so I can add ptr to it to `t_thinker`
