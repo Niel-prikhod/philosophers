@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:20:16 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/03 20:35:33 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:10:33 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ static void	phl_init_mutex(t_philo *phl, t_phl_mutex *forks, size_t number)
 	while (i < number)
 	{
 		pthread_mutex_init(&forks[i].mutex, NULL);
-		forks[i].flag = 1;
+		forks[i].flag = PHL_MUTEX_FREE;
 		i++;
 	}
 	pthread_mutex_init(&phl->simulation.mutex, NULL);
-	phl->simulation.flag = 1;
+	phl->simulation.flag = PHL_MUTEX_FREE;
 	pthread_mutex_init(&phl->logger.mutex, NULL);
-	phl->logger.flag = 1;
+	phl->logger.flag = PHL_MUTEX_FREE;
 }
 
 int	phl_init(int argc, char **argv, t_philo *phl)

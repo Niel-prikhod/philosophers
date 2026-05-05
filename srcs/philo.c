@@ -6,15 +6,13 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:07:10 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/02 17:13:22 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:07:34 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 #include "philo.h"
 #include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 
 /*

@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:04:46 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/03 20:32:05 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:09:50 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define SUCCESS 0
 # define FAILURE 1
+
+# define PHL_MUTEX_FREE 1
+# define PHL_MUTEX_BUSY 0
 
 # include "mmu.h"
 # include "phl_utils.h"
