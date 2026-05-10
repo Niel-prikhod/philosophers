@@ -6,12 +6,12 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:36:19 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/02 14:38:00 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/11 00:26:58 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>
-#include "philo.h"
+#include <unistd.h>
 #include "phl_utils.h"
 
 t_phl_time phl_get_timestamp(t_phl_time begin)

@@ -6,12 +6,13 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:43:26 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/02 17:15:11 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/11 00:51:50 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mmu.h"
 #include "philo.h"
+#include <string.h>
 
 void	*mmu_alloc(size_t size, size_t count, t_mmu **head)
 {
@@ -26,6 +27,7 @@ void	*mmu_alloc(size_t size, size_t count, t_mmu **head)
 	content = malloc(size * count);
 	if (!content)
 		return (free(node), NULL);
+	memset(content, 0, size * count);
 	*head = node;
 	node->content = content;
 	node->next = tmp;

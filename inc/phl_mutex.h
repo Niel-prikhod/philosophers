@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phl_utils.h                                        :+:      :+:    :+:   */
+/*   phl_mutex.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 14:30:29 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/11 00:22:37 by dprikhod         ###   ########.fr       */
+/*   Created: 2026/05/11 00:21:31 by dprikhod          #+#    #+#             */
+/*   Updated: 2026/05/11 00:22:19 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHL_UTILS_H
-# define PHL_UTILS_H
+#ifndef PHL_MUTEX_H
+# define PHL_MUTEX_H
 
-typedef unsigned long t_phl_time;
+# include "philo.h"
 
-t_phl_time phl_get_timestamp(t_phl_time begin);
+int	phl_mutex_unlock(t_phl_mutex mutex);
+int	phl_mutex_lock(t_phl_mutex mutex);
 
 #endif

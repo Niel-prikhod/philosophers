@@ -11,6 +11,8 @@ SRCS 		= $(addprefix $(SRC_DIR)/, \
 				phl_utils.c \
 				mmu.c \
 				phl_thread_routine.c \
+				phl_logger.c \
+				phl_mutex.c \
 		  		)
 
 COMP_FLAGS 	= -Wall -Wextra -Werror -I$(INC_DIR) -pthread

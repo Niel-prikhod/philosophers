@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:20:16 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/05/05 14:10:33 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/05/11 01:10:14 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,32 @@ t_args	init_args(int argc, char **argv)
 	return (parsed_args);
 }
 
-static void	phl_init_mutex(t_philo *phl, t_phl_mutex *forks, size_t number)
+static int	phl_init_mutex(t_philo *phl, t_phl_mutex *forks, size_t number)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < number)
 	{
-		pthread_mutex_init(&forks[i].mutex, NULL);
+		forks[i].mutex = mmu_alloc(sizeof(pthread_mutex_t), 1, &phl->mmu);
+		if (forks[i].mutex == NULL)
+			return (FAILURE);
+		pthread_mutex_init(forks[i].mutex, NULL);
 		forks[i].flag = PHL_MUTEX_FREE;
 		i++;
 	}
-	pthread_mutex_init(&phl->simulation.mutex, NULL);
+	phl->simulation.mutex = mmu_alloc(sizeof(pthread_mutex_t), 1, &phl->mmu);
+	if (phl->simulation.mutex == NULL)
+		return (FAILURE);
+	pthread_mutex_init(phl->simulation.mutex, NULL);
 	phl->simulation.flag = PHL_MUTEX_FREE;
-	pthread_mutex_init(&phl->logger.mutex, NULL);
-	phl->logger.flag = PHL_MUTEX_FREE;
+	phl->logger.phl_mutex.mutex = mmu_alloc(sizeof(pthread_mutex_t), 1,
+			&phl->mmu);
+	if (phl->logger.phl_mutex.mutex == NULL)
+		return (FAILURE);
+	pthread_mutex_init(phl->logger.phl_mutex.mutex, NULL);
+	phl->logger.phl_mutex.flag = PHL_MUTEX_FREE;
+	return (SUCCESS);
 }
 
 int	phl_init(int argc, char **argv, t_philo *phl)
@@ -102,10 +113,12 @@ int	phl_init(int argc, char **argv, t_philo *phl)
 	gettimeofday(&tv, NULL);
 	phl->forks = mmu_alloc(sizeof(pthread_mutex_t), phl->args.number,
 			&phl->mmu);
-	phl_init_mutex(phl, phl->forks, phl->args.number);
-	if (!phl->forks)
+	if (phl->forks == NULL)
 		return (FAILURE);
-	phl->start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	if (phl_init_mutex(phl, phl->forks, phl->args.number) != SUCCESS)
+		return (FAILURE);
+	phl->logger.start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	phl->logger.phl_mutex.flag = PHL_MUTEX_FREE;
 	return (SUCCESS);
 }
 
@@ -128,8 +141,8 @@ int	phl_init_threads(t_philo *phl)
 		thinker->args = &phl->args;
 		thinker->logger = phl->logger;
 		thinker->sim = phl->simulation;
-		pthread_mutex_init(&thinker->time_last_eat.mutex, NULL);
-		thinker->time_last_eat.time = phl->start_time;
+		pthread_mutex_init(thinker->time_last_eat.phl_mutex.mutex, NULL);
+		thinker->time_last_eat.time = phl->logger.start_time;
 		err_code = pthread_create(&phl->people[i].tid, NULL, thinker_routine,
 				&phl->people[i]);
 		if (err_code)
